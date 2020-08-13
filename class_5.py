@@ -14,4 +14,5 @@ joke_evaluation = "Isn't that joke so funny?!%r"
 print(joke_evaluation % hilarious)
 w = "This the left side of..."
 x = "a string with a right side"
+#字符串的连接运算
 print(w + x)
