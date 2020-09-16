@@ -11,6 +11,8 @@ def request_baidu():
 
 def request_csdn():
     resp = requests.get("https://www.csdn.net/")
+    print type(resp)
+    print resp.content
     print resp.status_code
 
 baidu_or_csdn = raw_input("if you want baidu or csdn?")
