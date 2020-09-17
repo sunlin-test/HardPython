@@ -9,9 +9,11 @@ plan = xlrd.open_workbook(filename)
 
 sheets = plan.sheet_names()
 sheets2 = []
-print sheets
+for  i in sheets:
+    print i
 print type(sheets[0]), type(sheets[1])
 for i in sheets:
-    sheets2.append(i.encode('utf8'))
+     sheets2.append(i)
+     print sheets2
 
 print sheets2
