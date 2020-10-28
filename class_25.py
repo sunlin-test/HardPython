@@ -1,6 +1,7 @@
 #coding=utf-8
 
 from sys import argv
+import class_24
 # 从sys导入argv至缓存
 # script, filename = argv
 # 对输入参数变量argv解包
@@ -65,6 +66,10 @@ b=[4]
 second_list = current_list
 current_list = current_list + b
 print "current_list = %s,second_list = %s" % (current_list,second_list)
+
+
+print "class_25.py:__name__ == ",__name__
+print class_24.print_name()
 
 
 
