@@ -6,4 +6,7 @@ def next_birthday(date_of_birth, is_lunar_calendar):
     pass
 
 
+def print_name():
+    clas_24_name = __name__
+    print "class_24.py:__name__ == ",__name__
 
