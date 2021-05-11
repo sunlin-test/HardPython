@@ -23,3 +23,12 @@ print "Name:%15s, Height:%8.2f, Weight:%8d." % (my_name, my_height, my_weight)
 print "Name:%-15s, Height:%-8.2f, Weight:%-8d." % (my_name, my_height, my_weight)
 # 指定占位符宽度且使用0占位
 print "Name:%-15s, Height:%08.2f, Weight:%08d." % (my_name, my_height, my_weight)
+
+# %r输入
+print "Name:%15s, Height:%r, Weight:%8r." % (my_name, my_height, my_weight)
+
+# 将英寸和磅转换成厘米和千克
+# 英寸->厘米
+inch = input("英寸->厘米：")
+cm = 2.54 * inch
+print "%r英寸 = %.2f厘米" % (inch,cm)

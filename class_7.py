@@ -14,6 +14,7 @@ print formatter % (
 months = "\nJan\nFeb\nMar"
 print "Here are the months %r" % months
 print "Here are the months %s" % months
+print "test"
 year = repr("\n")
 time = str("\n")
 # repr()显示计算机处理前的对象   str()显示计算机处理后的对象?

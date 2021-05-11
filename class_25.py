@@ -53,6 +53,7 @@ print_remaining_lines(current_file)
 # add   iadd
 current_line += 1
 print "current_line = %s" % current_line
+print "test"
 
 # iadd 可变对象，iadd传入两个参数，左边对象指向不变，即两个参数值均改变
 current_list = [1,2,3]
