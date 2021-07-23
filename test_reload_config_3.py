@@ -1,0 +1,3 @@
+import test_reload_config_2_bak
+
+print test_reload_config_2_bak.test1

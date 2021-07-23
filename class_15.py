@@ -8,16 +8,21 @@ script, filename = argv
 txt = open(filename)
 # txt.read()，获取文件中的内容从头到尾，可read(10)取前几位数据，内容type为string
 print "Here is your file %r:" % filename
-print txt.read(10).decode('utf-8').encode('gbk')
+print txt.readline().decode('utf-8').encode('gbk')
 # 控制台输入raw_input() 、 input()
 print "Type the filename again:"
 filename_again = raw_input("> ")
 
 # 打开方式r+ 读写
-txt_again = open(filename_again,'a+', )
+txt_again = open(filename_again,'a+')
 
-# next()下一个值，已到EOF，则抛出异常
-print "下一个值是:%s".decode('utf-8').encode('gbk') % txt.next()
+print txt_again.read(10)
+# next() 读取当前位点至本行结尾的内容 或下一行，已到EOF，则抛出异常
+try:
+    print "下一个值是:%s".decode('utf-8').encode('gbk') % txt.next()
+except Exception as e:
+    print e.message
+
 
 # tell() 返回现在的位点
 print "现在的文件位点是:%s".decode('utf-8').encode('gbk') % txt.tell()
@@ -29,8 +34,10 @@ txt_again.flush()
 # truncate()将位点后的文件内容删除
 print txt_again.read().decode('utf-8').encode('gbk')
 # txt_again.truncate()
+# readline() 读取当前位点所在行 或下一行
 print txt_again.readline()
 print txt_again.readline()
+# readlines() 读取所有行，返回一个列表
 # print txt_again.readlines()
 
 print "%r文件状态为:%s".decode('utf-8').encode('gbk') % (filename, txt.closed)

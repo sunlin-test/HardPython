@@ -1,6 +1,7 @@
 # coding=utf-8
 
-formatter = "%s %s %s %s"
+formatter = "%r %r %r %r"
+# formatter = "%s %s %s %s"
 print formatter % (1, 2, 3, 4)
 print formatter % ("One", "Two", "Three", "Four")
 print formatter % (True, False, False, True)
