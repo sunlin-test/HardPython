@@ -11,7 +11,7 @@ blackening_value = 100
 purify_value = 100
 # todo 恶魔天使变装
 
-class Role:
+class Role(object):
     def __init__(self, role):
         self.role = role
         if role == '恶魔':
