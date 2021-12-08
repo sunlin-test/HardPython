@@ -15,11 +15,20 @@ unittest.main() --TestProgram()的__init__()
 
 '''运行方式：
 1. 命令行执行python -m unittest test1            --注：不能带.py   走loadTestsFromNames,test.py会被分为两部分，test1、py，test1中属性py不存在 报错
-   入口非__name__==__main__，而是unittest包下的__main__.py
+   入口非__name__==__main__，而是unittest包下的__main__.py   因为未收到传输argv，将采用sys.argv：python -m unittest test1
 2. 命令行执行python test1.py                     --走loadTestsFromModule  ,module为入口模块,即test.py，查找模块下的测试类、测试方法
    不走-m时，在当前目录下查找，调用模块  执行入口__name__==__main__
 3. 命令行执行python -m test1                     --走-m，模块名唯一时在任何目录下执行-m命令，通过sys.path自动查找模块名，通过-m调用该模块 如python -m pip
    执行入口模块的__name__==__main__
+4. pycharm run执行test1.py
+1）有多个用例时，光标放在某个用例，右键run 'Unittests' for test1.test_esstring3，则只执行这个用例  --pycharm的unittests插件功能
+'''
+
+'''unittest测试用例的4种执行结果 
+1. 成功
+2. 失败 --断言失败
+3. 跳过 --unittest.skip()
+4. 报错 --断言前抛异常
 '''
 
 
@@ -28,6 +37,11 @@ import sys
 
 
 class SampleTest(unittest.TestCase):
+    def test_esstring4(self):
+        a = 'sdf'
+        print "run test4"
+        raise Exception
+
     def test_esstring3(self):
         a = 'sdf'
         print "run test3"
@@ -36,8 +50,9 @@ class SampleTest(unittest.TestCase):
     def test_asstring2(self):
         a = 'sdf'
         print "run test2"
-        self.assertEqual(isinstance(a, str), True)
+        self.assertEqual(isinstance(a, int), True,"exception:True")
 
+    @unittest.skip("skip")
     def test_asstring1(self):
         a = 'sdf'
         print "run test1"
