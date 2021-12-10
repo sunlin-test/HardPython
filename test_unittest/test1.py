@@ -25,10 +25,10 @@ unittest.main() --TestProgram()的__init__()
 '''
 
 '''unittest测试用例的4种执行结果 
-1. 成功
-2. 失败 --断言失败
-3. 跳过 --unittest.skip()
-4. 报错 --断言前抛异常
+1. 成功     case抛出_ExpectedFailure
+2. 失败 --断言失败          result.failures,case抛出failureException、_UnexpectedSuccess
+3. 跳过 --unittest.skip() result.skipped,case抛出SkipTest或 通过函数装饰器@unittest.skip()跳过
+4. 报错 --断言前抛异常       result.errors,case抛出其他异常
 '''
 
 
@@ -37,20 +37,20 @@ import sys
 
 
 class SampleTest(unittest.TestCase):
-    def test_esstring4(self):
-        a = 'sdf'
-        print "run test4"
-        raise Exception
-
+    # def test_esstring4(self):
+    #     a = 'sdf'
+    #     print "run test4"
+    #     raise Exception
+    #
     def test_esstring3(self):
         a = 'sdf'
         print "run test3"
         self.assertEqual(isinstance(a, str), True)
-
-    def test_asstring2(self):
-        a = 'sdf'
-        print "run test2"
-        self.assertEqual(isinstance(a, int), True,"exception:True")
+    #
+    # def test_asstring2(self):
+    #     a = 'sdf'
+    #     print "run test2"
+    #     self.assertEqual(isinstance(a, int), True,"exception:True")
 
     @unittest.skip("skip")
     def test_asstring1(self):
