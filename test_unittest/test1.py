@@ -2,15 +2,16 @@
 
 '''unittest执行用例内部流程：
 unittest.main() --TestProgram()的__init__()
-                    参数解析self.parseArgs(argv) --根据参数找到脚本文件-测试类-测试方法(TestCase对象)，用TestSuite类的_tests多层包装
+                    参数解析self.parseArgs(argv) --testLoader根据参数找到脚本文件-测试类(loadTestsFromModule查找)-测试方法(getTestCaseNames查找-test开头且有__call__属性，若无则查找runTest()方法)(TestCase对象)，用TestSuite类的_tests多层包装
                                                 再用self.test指向suite
-                    运行测试脚本self.runTests()   --testRunner.run(self.test)
+                                                将一个测试类中的测试方法用一个suite封装，再用一个suite将多个测试类包装
+                    运行测试脚本self.runTests()   --testRunner.run(self.test) (默认运行器TextTestRunner)
                                                     --suite.__call__ --指向suite的run方法
                                                                       --TestCase.__call__指向TestCase的run方法
                                                                         --TestCase.setUp()
                                                                         --TestCase.test_() / runTest()
                                                                         --TestCase.tearDown()
-                                                  TextTestResult()记录case总数
+                                                  默认TextTestResult()记录case总数
 '''
 
 '''运行方式：
