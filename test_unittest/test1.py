@@ -26,10 +26,12 @@ unittest.main() --TestProgram()的__init__()
 '''
 
 '''unittest测试用例的4种执行结果 
-1. 成功     case抛出_ExpectedFailure
-2. 失败 --断言失败          result.failures,case抛出failureException、_UnexpectedSuccess
-3. 跳过 --unittest.skip() result.skipped,case抛出SkipTest或 通过函数装饰器@unittest.skip()跳过
-4. 报错 --断言前抛异常       result.errors,case抛出其他异常
+1. 成功 .     success = True --默认的result.addSuccess()未统计成功的case
+2. 失败 E --断言失败          result.failures,case抛出failureException(具体test_用例执行过程中抛出)、_UnexpectedSuccess
+3. 跳过 s --unittest.skip() result.skipped,case抛出SkipTest(具体test_用例执行过程中抛出)   --通过函数装饰器@unittest.skip()跳过，在test_用例执行时抛出
+4. 报错 F--断言前抛异常       result.errors,case抛出其他异常
+5. 预期报错 x --抛出用户自定义预期异常 result.expectedFailures
+6. 非预期成功 u--抛出用户自定义预期异常result.unexpectedSuccesses 
 '''
 
 
@@ -53,12 +55,17 @@ class SampleTest(unittest.TestCase):
     #     print "run test2"
     #     self.assertEqual(isinstance(a, int), True,"exception:True")
 
-    @unittest.skip("skip")
-    def test_asstring1(self):
+    #@unittest.skip("skip")
+    def test_asstring4(self):
         a = 'sdf'
-        print "run test1"
+        print "run test4"
         print "sys.path:", sys.path
         self.assertEqual(isinstance(a, str), True)
+
+    # @unittest.skip("skip") 与 以下效果相同。将test_asstring()函数置换成skip_wrapper()
+    # skip_test = unittest.skip("skip")
+    # test_asstring4 = skip_test(test_asstring4)
+
 
     # def runTest(self):
     #     # step1
