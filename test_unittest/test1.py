@@ -58,7 +58,7 @@ msg为中文时需decode("utf-8")为unicode，否则unicode(msg)处理异常
 4. 测试数据传入字典
     1)测试用例需设置接收参数**kwargvs。@ddt.data({"mysql_version":'5.6',"paramenter_version":'test1'},
              {"mysql_version":'5.7',"paramenter_version":'test1'},
-             {"mysql_version":'8.0',"paramenter_version":'test1')
+             {"mysql_version":'8.0',"paramenter_version":'test1'})
    2) @ddt.data(test_data)  --暂不知道如何处理
    
 '''
@@ -90,16 +90,18 @@ class SampleTest(unittest.TestCase):
     def setUp(self):
         print "this is setup function"
 
-    #@ddt.data(1,2,3,4)
-    @ddt.data(test_data)
+    # @ddt.data(1,2,3,4)
+    @ddt.data({"mysql_version":'5.6',"paramenter_version":'test1'},
+             {"mysql_version":'5.7',"paramenter_version":'test1'},
+             {"mysql_version":'8.0',"paramenter_version":'test1'})
     @ddt.unpack
     def test_asstring3(self,**kwargs):
         a = 'sdf'
         print "run test3"
-        mysql_version2 = kwargs['mysql_version']
-        paramenter_version2 = kwargs['paramenter_version']
-        print mysql_version2,paramenter_version2
-        self.assertEqual(isinstance(a, str), False,'check error')
+        # mysql_version2 = kwargs['mysql_version']
+        # paramenter_version2 = kwargs['paramenter_version']
+        # print mysql_version2,paramenter_version2
+        #self.assertEqual(isinstance(a, str), False,'check error')
 
         #self.assertFalse(True,msg='校验失败')
         #
@@ -108,7 +110,7 @@ class SampleTest(unittest.TestCase):
     #     print "run test2"
     #     self.assertEqual(isinstance(a, int), True,"exception:True")
 
-    #@unittest.skip("skip")
+    @unittest.skip("skip")
     def test_asstring4(self):
         a = 'sdf'
         print "run test4"
@@ -145,6 +147,9 @@ class SampleTest(unittest.TestCase):
 
 
 if __name__ == "__main__":
+    print ord('a')
+    print ord('c')
+    print ord('e')
     print "------------------start-------------------"
 
     # unittest.main()实际调用的是TestProgram()，即定义一个TestProgram对象，主要执行init()方法
