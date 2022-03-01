@@ -1,0 +1,8 @@
+- name: 获取标签
+  request:
+    method: get
+    url: https://api.weixin.qq.com/cgi-bin/tags/get
+    data:
+      access_token: ''
+  validate:
+    - equals:

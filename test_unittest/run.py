@@ -8,7 +8,7 @@
    1）直接定义一个suite对象，再addTest(具体测试方法)  -- addTest不能添加以数据驱动的测试方法？
    2) 用testLoader去加载指定目录下文件中的测试用例到一个suite中  unittest.defaultTestLoader.discover(指定文件)
    执行suite
-   1) unittest.main(defaultTest='suite')
+   1) unittest.main(defaultTest='suite')  --传输defaultTest='suite'，createTest()中loader查找函数入口函数的名为suite的属性，发现为TestSuite对象则原样返回给self.test。
    2) 定义一个runner对象，runner.run(suite)
 
 

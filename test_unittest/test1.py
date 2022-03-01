@@ -56,15 +56,27 @@ msg为中文时需decode("utf-8")为unicode，否则unicode(msg)处理异常
 
 3. 测试数据可以以文件形式传入@ddt.file_data()
 4. 测试数据传入字典
-    1)测试用例需设置接收参数**kwargvs。@ddt.data({"mysql_version":'5.6',"paramenter_version":'test1'},
+    1)测试用例需设置接收参数**kwargvs，或指定变量名paramenter_version、mysql_version接收参数。@ddt.data({"mysql_version":'5.6',"paramenter_version":'test1'},
              {"mysql_version":'5.7',"paramenter_version":'test1'},
              {"mysql_version":'8.0',"paramenter_version":'test1'})
-   2) @ddt.data(test_data)  --暂不知道如何处理
+   2) @ddt.data(test_data)  --暂不知道如何处理,@unpack只会拆解一层？
    
 '''
 
+'''unittest.main() 传参含义
+1.  module=__main__，入口模块，一般为测试用例所在模块
+2.  defaultTest，默认执行的测试用例，为测试方法或suite
+3.  verbosity 执行结果输出详细level
+    =0 
+    =1  . F S等省略信息
+    >=2 OK  FAIL skip等详细信息
+'''
 
-import unittest
+'''封装夹具：多个测试用例重复的相同的代码封装到一个公共模块
+问题1： 装饰器skip()不能使用
+'''
+
+from common.my_unit import MyUnit
 import ddt
 import sys
 
@@ -73,31 +85,21 @@ test_data = [{"mysql_version":'5.6',"paramenter_version":'test1'},
              {"mysql_version":'8.0',"paramenter_version":'test1'}]
 
 @ddt.ddt
-class SampleTest(unittest.TestCase):
+class SampleTest(MyUnit):
     # def test_esstring4(self):
     #     a = 'sdf'
     #     print "run test4"
     #     raise Exception
     #
-    @classmethod
-    def setUpClass(cls):
-        print "this is setupClass function"
 
-    @classmethod
-    def tearDownClass(cls):
-        print "this is teardownclass function"
-
-    def setUp(self):
-        print "this is setup function"
 
     # @ddt.data(1,2,3,4)
-    @ddt.data({"mysql_version":'5.6',"paramenter_version":'test1'},
-             {"mysql_version":'5.7',"paramenter_version":'test1'},
-             {"mysql_version":'8.0',"paramenter_version":'test1'})
+    @ddt.data(test_data)
     @ddt.unpack
-    def test_asstring3(self,**kwargs):
+    def test_asstring3(self,paramenter_version,mysql_version):
         a = 'sdf'
         print "run test3"
+        print mysql_version,paramenter_version
         # mysql_version2 = kwargs['mysql_version']
         # paramenter_version2 = kwargs['paramenter_version']
         # print mysql_version2,paramenter_version2
@@ -110,7 +112,7 @@ class SampleTest(unittest.TestCase):
     #     print "run test2"
     #     self.assertEqual(isinstance(a, int), True,"exception:True")
 
-    @unittest.skip("skip")
+    # @MyUnit.skip
     def test_asstring4(self):
         a = 'sdf'
         print "run test4"
@@ -142,8 +144,7 @@ class SampleTest(unittest.TestCase):
     #     print "run test3"
     #     self.assertEqual(isinstance(a, str), False,"error")
 
-    def tearDown(self):
-        print "this is tearDown function"
+
 
 
 if __name__ == "__main__":
@@ -153,6 +154,6 @@ if __name__ == "__main__":
     print "------------------start-------------------"
 
     # unittest.main()实际调用的是TestProgram()，即定义一个TestProgram对象，主要执行init()方法
-    unittest.main()
+    MyUnit.main()
     print "------------------end---------------------"
 

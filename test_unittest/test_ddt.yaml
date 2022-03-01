@@ -1,0 +1,9 @@
+languages:
+  - Ruby
+  - Rerl
+  - Python
+websites:
+  YAML: yaml.org
+  Ruby: ruby-lang.org
+  Python: python.org
+  Perl: use.perl.org
