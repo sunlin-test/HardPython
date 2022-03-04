@@ -1,0 +1,26 @@
+config:
+    name: testcase description
+    variables: {}
+teststeps:
+-   name: !!python/unicode '/cgi-bin/tags/get'
+    request:
+        headers:
+            !!python/unicode 'Postman-Token': !!python/unicode '349fc554-16cd-47e1-9fb7-c38c75543113'
+            !!python/unicode 'User-Agent': !!python/unicode 'PostmanRuntime/7.29.0'
+        method: !!python/unicode 'GET'
+        params:
+            !!python/unicode 'access_token': !!python/unicode '54_bCq2IIMczKFk6rUl49fe6GqUFovygg83qR_EQ_N40ACjJQJ6OpON6ZN4d4IWT3UljEzwTOJrTofe6C40jWwho_c7vKYixiYBEH_vsI6dVgFyGlpT3kFgwFp2tXmTAzYJnboh2Qe7_d3PnkFQKWHdAIAEQB'
+        url: !!python/unicode 'https://api.weixin.qq.com/cgi-bin/tags/get'
+    validate:
+    -   eq:
+        - status_code
+        - 200
+    -   eq:
+        - headers.Content-Type
+        - !!python/unicode 'application/json; encoding=utf-8'
+    -   eq:
+        - content.errcode
+        - 48001
+    -   eq:
+        - content.errmsg
+        - !!python/unicode 'api unauthorized rid: 6221870f-69436689-039359f5'

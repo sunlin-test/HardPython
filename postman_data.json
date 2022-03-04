@@ -1,0 +1,8 @@
+[
+  {"grant_type": "client_credential","appid": "wx97f31b7d58806a46","secret": "ac16be0a8b36a0ebd596c041300869ae","assert_value": "access_token"},
+  {"grant_type": "","appid": "wx97f31b7d58806a46","secret": "ac16be0a8b36a0ebd596c041300869ae","assert_value": 40002},
+  {"grant_type": "client_credential","appid": "","secret": "ac16be0a8b36a0ebd596c041300869ae","assert_value": 41002},
+  {"grant_type": "client_credential","appid": "wx97f31b7d58806a46","secret": "","assert_value": 41004}
+]
+
+

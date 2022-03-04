@@ -1,0 +1,25 @@
+config:
+    name: 获取token接口
+    variables: {}
+teststeps:
+-   name: !!python/unicode '/cgi-bin/token'
+    request:
+        headers:
+            !!python/unicode 'Postman-Token': !!python/unicode 'df1bf99c-e213-42a3-b763-80d87896faf3'
+            !!python/unicode 'User-Agent': !!python/unicode 'PostmanRuntime/7.29.0'
+        method: !!python/unicode 'GET'
+        params:
+            !!python/unicode 'appid': !!python/unicode 'wx97f31b7d58806a46'
+            !!python/unicode 'grant_type': !!python/unicode 'client_credential'
+            !!python/unicode 'secret': !!python/unicode 'ac16be0a8b36a0ebd596c041300869ae'
+        url: !!python/unicode 'https://api.weixin.qq.com/cgi-bin/token'
+    validate:
+    -   eq:
+        - status_code
+        - 200
+    -   eq:
+        - headers.Content-Type
+        - !!python/unicode 'application/json; encoding=utf-8'
+    -   eq:
+        - content.expires_in
+        - 7200
