@@ -18,6 +18,8 @@ proxy = {
 response = requests.request("get","http://www.baidu.com",params = param,proxies=proxy,verify=False)
 print response.content
 print type(response.text)
+print response.url
+print response.encoding
 
 # 2.get响应对应的请求体
 # print response.request.url
@@ -63,6 +65,19 @@ print response.json()["translateResult"][0][0]["tgt"]
 print response.status_code
 # 4. response.request.body 返回post请求body
 print response.request.body
-
+print response.url
+print response.encoding
+print response.content
+print response.text
 
 # 通过代理
+
+
+# 3.拉取图片
+# https://www.baidu.com/img/pc_9c5c85e6b953f1d172e1ed6821618b91.png
+response = requests.get("https://www.baidu.com/img/pc_9c5c85e6b953f1d172e1ed6821618b91.png")
+img_name = "baidu_get_img.jpg"
+img_path = './'
+with open(img_path + img_name,'wb') as f:
+    f.write(response.content)
+print "保存图片完成"
