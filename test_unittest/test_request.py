@@ -81,3 +81,41 @@ img_path = './'
 with open(img_path + img_name,'wb') as f:
     f.write(response.content)
 print "保存图片完成"
+
+# 4. session 跨会话请求，使用同一个cookie，让请求有连贯性
+print "use session().get:"
+s = requests.session()
+r = s.get(url='http://httpbin.org/cookies/set/sessioncookie/123456789')
+print r.text
+print s.cookies.items()
+r = s.get(url='http://httpbin.org/cookies')
+print r.text
+print s.cookies.items()
+s.close()
+
+print "use requests.get:"
+r = requests.get(url='http://httpbin.org/cookies/set/sessioncookie/123456789')
+print r.text
+print r.cookies.items()
+r = requests.get(url='http://httpbin.org/cookies')
+print r.text
+print r.cookies.items()
+
+# 5. session中的多个请求的缺省参数，如缺省请求头设置s.headers.update()
+s = requests.session()
+s.headers.update({'x-test': 'true'})
+r = s.get(url='http://httpbin.org/headers',headers={'x-test2': 'true'})
+print r.text
+r = s.get(url='http://httpbin.org/headers')
+print r.text
+s.close()
+
+# 6. session测试百度cookie
+print "test baidu cookie by session"
+s = requests.session()
+s.headers.update({"User-Agent":"Baiduspider"})
+r = s.get("http://baidu.com",params={"wd":"test"})
+r2 = s.get("http://baidu.com")
+print s.cookies.items()
+print r.text
+s.close()
