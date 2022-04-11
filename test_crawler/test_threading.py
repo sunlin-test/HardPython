@@ -9,6 +9,8 @@
 原文链接：https://blog.csdn.net/lgl782519197/article/details/111873584
 
 1. os.getpid() 运行python文件时，会生成一个新进程，即主进程
+2. threading.current_thread()当前的活动线程
+3. f'{gile["name"]}'  是"{}".formate(gile["name"]) 的简写
 
 '''
 
@@ -17,7 +19,7 @@ import os,threading
 
 
 def tack(girl):
-    print(f'进程号{os.getpid()}和girl["name"]开始交谈，线程号{threading.current_thread()}交谈时间{girl["time"]}')
+    print(f'进程号{os.getpid()}和{girl["name"]}开始交谈，线程号{threading.current_thread()}交谈时间{girl["time"]}')
     time.sleep(girl["time"])
     print(f'进程号{os.getpid()}和girl["name"]交谈结束，线程号{threading.current_thread()}')
 
@@ -29,7 +31,7 @@ def girl_tack(list1):
 
 if __name__ == "__main__":
     # 客户
-    girl_list1 = [{"name": "小丽", "time": 10},{"name": "小美", "time": 2},{"name": "小爱", "time": 20}]
+    girl_list1 = [{"name": "小丽", "time": 5},{"name": "小美", "time": 2},{"name": "小爱", "time": 5}]
     start_time = time.time()
     # 交谈
     girl_tack(girl_list1)
