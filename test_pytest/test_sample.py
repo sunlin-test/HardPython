@@ -18,6 +18,9 @@
 '''
 
 import pytest
+import os
+import allure_pytest
+import allure
 
 def func(x):
     return x + 1
@@ -27,10 +30,20 @@ def test_answer():
 
 
 def f():
-    raise SystemExit(1)
+    print("test")
+    # raise SystemExit(1)
 
 def test_mytest():
     with pytest.raises(SystemExit):
         f()
 
 
+
+
+if __name__ == '__main__':
+    print("starttest")
+    xml_report_path = './Report/xml'
+    html_report_path = './Report/html'
+    pytest.main(['-s', '-q','test_sample.py','--clean-alluredir','--alluredir=allure-results'])
+    print('endtest')
+    os.system(r"allure generate -c -o allure-report")
